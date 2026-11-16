@@ -1,0 +1,62 @@
+=== ANOVA de dos factores (typ=2), respuesta: costo ===
+                          sum_sq  df       F     PR(>F)
+C(temperatura)           343.599   2 2.15222   0.122826
+C(tamano)                 116561   2 730.112 1.5314e-52
+C(temperatura):C(tamano) 514.977   4 1.61285   0.178985
+Residual                 6465.75  81     NaN        NaN
+Significativo (p < 0.05): C(temperatura): no, C(tamano): sí, C(temperatura):C(tamano): no
+
+Shapiro-Wilk residuos: W = 0.3485, p = 4.12e-18
+Levene (Brown-Forsythe) entre las 9 celdas: W = 2.3246, p = 0.0267
+
+=== ANOVA sobre rangos (verificación no paramétrica) ===
+                          sum_sq  df       F      PR(>F)
+C(temperatura)             480.2   2 6.89796  0.00171263
+C(tamano)                  54000   2 775.697 1.49359e-53
+C(temperatura):C(tamano)   316.4   4  2.2725   0.0684936
+Residual                  2819.4  81     NaN         NaN
+
+=== Sensibilidad: ANOVA paramétrico sin la corrida extrema (n = 15, T0 = 1147.71, costo = 402.78) ===
+                          sum_sq  df       F     PR(>F)
+C(temperatura)           67.2857   2 4.98367 0.00912443
+C(tamano)                 110385   2 8175.89 3.1349e-93
+C(temperatura):C(tamano) 74.7154   4 2.76698  0.0328838
+Residual                  540.05  80     NaN        NaN
+
+=== Efecto de la temperatura dentro de cada tamaño ===
+n = 5: las 30 corridas obtienen el mismo costo (239.92); varianza nula, no hay efecto que probar.
+n = 10: ANOVA un factor F = 1.484, p = 0.2447 | Kruskal-Wallis H = 3.882, p = 0.1436
+Multiple Comparison of Means - Tukey HSD, FWER=0.05 
+====================================================
+group1  group2 meandiff p-adj   lower  upper  reject
+----------------------------------------------------
+136.11  641.91   0.6742 0.6674 -1.2616   2.61  False
+136.11 1147.71   1.3449 0.2153 -0.5908 3.2807  False
+641.91 1147.71   0.6707 0.6702 -1.2651 2.6065  False
+----------------------------------------------------
+n = 15: ANOVA un factor F = 1.797, p = 0.1851 | Kruskal-Wallis H = 8.085, p = 0.01755
+ Multiple Comparison of Means - Tukey HSD, FWER=0.05  
+======================================================
+group1  group2 meandiff p-adj   lower    upper  reject
+------------------------------------------------------
+136.11  641.91   4.3116 0.8067 -12.7378 21.3611  False
+136.11 1147.71  12.8089  0.169  -4.2406 29.8583  False
+641.91 1147.71   8.4972  0.443  -8.5523 25.5467  False
+------------------------------------------------------
+
+=== Mediana bootstrap (B = 10000) e IC 95% percentil por punto de diseño ===
+ tamano nivel  temperatura   media  desv_est  mediana_muestral  mediana_bootstrap  ic_inf  ic_sup
+      5  bajo      136.110 239.922     0.000           239.922            239.922 239.922 239.922
+      5 medio      641.910 239.922     0.000           239.922            239.922 239.922 239.922
+      5  alto     1147.710 239.922     0.000           239.922            239.922 239.922 239.922
+     10  bajo      136.110 306.984     0.264           306.901            306.901 306.901 306.901
+     10 medio      641.910 307.658     1.843           306.901            306.988 306.901 307.734
+     10  alto     1147.710 308.329     2.383           307.317            307.413 306.901 310.254
+     15  bajo      136.110 316.940     2.671           315.957            316.073 315.957 316.377
+     15 medio      641.910 321.251     4.670           321.197            321.096 316.377 325.223
+     15  alto     1147.710 329.748    26.083           323.210            322.667 316.870 327.287
+
+=== Temperatura con mejor desempeño por tamaño ===
+n = 5: T* = 136.11 (bajo); mediana bootstrap = 239.922, IC 95% = [239.922, 239.922]  (empate en los tres niveles)
+n = 10: T* = 136.11 (bajo); mediana bootstrap = 306.901, IC 95% = [306.901, 306.901]
+n = 15: T* = 136.11 (bajo); mediana bootstrap = 316.073, IC 95% = [315.957, 316.377]
